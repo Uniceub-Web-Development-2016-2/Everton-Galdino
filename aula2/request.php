@@ -56,11 +56,15 @@
         }
  
         public function toString(){
-            $request = $this->protocol."://".$this->ip."/".$this->resource."?".$this->parameters;
-            
-	return utf8_encode($request);
+		$String = "";
+		$Inc = 1;
+		foreach($this->Parameters as $var) {
+			$String .= "P".$Inc."=".$var."&amp";
+			$Inc++;
+		}
+	return $this->Protocol.'://'.$this->IP.'/'.$this->Resource.'?'.$String;
         }
- 
-	$request = new Request("http","127.0.0.1","resources/Everton-Galdino",array("param1"=>123,"param2"=>456),"POST");
-	echo $request->toString();
     }
+
+$request = new Request("POST", "http","127.0.0.1","resources/Everton-Galdino",array ("nome", "email", "telefone", "logradouro"));
+echo $request->toString();
