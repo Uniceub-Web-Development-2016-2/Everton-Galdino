@@ -1,212 +1,286 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 04, 2016 at 09:13 
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema dotaez
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema dotaez
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `dotaez` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `dotaez` ;
-
--- -----------------------------------------------------
--- Table `dotaez`.`tb_user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_user` (
-  `idt_user` INT NOT NULL AUTO_INCREMENT,
-  `nme_user` VARCHAR(50) NOT NULL,
-  `lgn_user` VARCHAR(45) NOT NULL,
-  `psw_user` VARCHAR(45) NOT NULL,
-  `email_user` VARCHAR(80) NOT NULL,
-  `nickdota_user` VARCHAR(50) NOT NULL,
-  `status_user` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`idt_user`),
-  UNIQUE INDEX `idt_user_UNIQUE` (`idt_user` ASC),
-  UNIQUE INDEX `lgn_user_UNIQUE` (`lgn_user` ASC))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `dotaez`.`tb_build`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_build` (
-  `idt_build` INT NOT NULL AUTO_INCREMENT,
-  `nme_build` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`idt_build`),
-  UNIQUE INDEX `idt_build_UNIQUE` (`idt_build` ASC))
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `dotaez`
+--
 
--- -----------------------------------------------------
--- Table `dotaez`.`tb_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_status` (
-  `idt_status` INT NOT NULL AUTO_INCREMENT,
-  `strenght` INT NOT NULL,
-  `agility` INT NOT NULL,
-  `intellect` INT NOT NULL,
-  PRIMARY KEY (`idt_status`))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `build`
+--
 
--- -----------------------------------------------------
--- Table `dotaez`.`tb_hero`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_hero` (
-  `idt_hero` INT NOT NULL AUTO_INCREMENT,
-  `nme_hero` VARCHAR(45) NOT NULL,
-  `type_hero` VARCHAR(45) NOT NULL,
-  `cod_status` INT NOT NULL,
-  PRIMARY KEY (`idt_hero`, `cod_status`),
-  UNIQUE INDEX `idt_hero_UNIQUE` (`idt_hero` ASC),
-  INDEX `fk_tb_hero_tb_status1_idx` (`cod_status` ASC),
-  CONSTRAINT `fk_tb_hero_tb_status1`
-    FOREIGN KEY (`cod_status`)
-    REFERENCES `dotaez`.`tb_status` (`idt_status`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `build` (
+  `idt_build` int(11) NOT NULL,
+  `nme_build` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `build`
+--
 
--- -----------------------------------------------------
--- Table `dotaez`.`ta_herobuild`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`ta_herobuild` (
-  `cod_hero` INT NOT NULL,
-  `cod_build` INT NOT NULL,
-  PRIMARY KEY (`cod_hero`, `cod_build`),
-  INDEX `fk_tb_hero_has_tb_build_tb_build1_idx` (`cod_build` ASC),
-  INDEX `fk_tb_hero_has_tb_build_tb_hero1_idx` (`cod_hero` ASC),
-  CONSTRAINT `fk_tb_hero_has_tb_build_tb_hero1`
-    FOREIGN KEY (`cod_hero`)
-    REFERENCES `dotaez`.`tb_hero` (`idt_hero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_hero_has_tb_build_tb_build1`
-    FOREIGN KEY (`cod_build`)
-    REFERENCES `dotaez`.`tb_build` (`idt_build`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `build` (`idt_build`, `nme_build`) VALUES
+(1, 'Explosion Seer');
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotaez`.`tb_skill`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_skill` (
-  `idt_skill` INT NOT NULL AUTO_INCREMENT,
-  `nme_skill` VARCHAR(45) NOT NULL,
-  `effect_skill` LONGTEXT NOT NULL,
-  `dano_skill` INT NULL,
-  `type_dano_skill` VARCHAR(45) NULL,
-  `cod_hero` INT NOT NULL,
-  PRIMARY KEY (`idt_skill`, `cod_hero`),
-  INDEX `fk_tb_skill_tb_hero1_idx` (`cod_hero` ASC),
-  CONSTRAINT `fk_tb_skill_tb_hero1`
-    FOREIGN KEY (`cod_hero`)
-    REFERENCES `dotaez`.`tb_hero` (`idt_hero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `hero`
+--
 
+CREATE TABLE `hero` (
+  `idt_hero` int(11) NOT NULL,
+  `nme_hero` varchar(45) NOT NULL,
+  `type_hero` varchar(45) NOT NULL,
+  `cod_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `dotaez`.`tb_item`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotaez`.`tb_item` (
-  `idt_item` INT NOT NULL AUTO_INCREMENT,
-  `nme_item` VARCHAR(45) NOT NULL,
-  `effect_item` LONGTEXT NOT NULL,
-  `dano_item` INT NULL,
-  `type_item` VARCHAR(45) NULL,
-  `tb_build_idt_build` INT NOT NULL,
-  PRIMARY KEY (`idt_item`, `tb_build_idt_build`),
-  INDEX `fk_tb_item_tb_build1_idx` (`tb_build_idt_build` ASC),
-  CONSTRAINT `fk_tb_item_tb_build1`
-    FOREIGN KEY (`tb_build_idt_build`)
-    REFERENCES `dotaez`.`tb_build` (`idt_build`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Dumping data for table `hero`
+--
 
+INSERT INTO `hero` (`idt_hero`, `nme_hero`, `type_hero`, `cod_status`) VALUES
+(1, 'Dark Seer', 'Intellect', 1);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_user`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_user` (`idt_user`, `nme_user`, `lgn_user`, `psw_user`, `email_user`, `nickdota_user`, `status_user`) VALUES (1, 'Administrador', 'admin', 'MD5(admin)', 'everton-cs@hotmail.com.br', 'Abraga', true);
+--
+-- Table structure for table `herobuild`
+--
 
-COMMIT;
+CREATE TABLE `herobuild` (
+  `cod_hero` int(11) NOT NULL,
+  `cod_build` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `herobuild`
+--
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_build`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_build` (`idt_build`, `nme_build`) VALUES (1, 'Explosion Seer');
+INSERT INTO `herobuild` (`cod_hero`, `cod_build`) VALUES
+(1, 1);
 
-COMMIT;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `item`
+--
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_status`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_status` (`idt_status`, `strenght`, `agility`, `intellect`) VALUES (1, 22, 12, 29);
+CREATE TABLE `item` (
+  `idt_item` int(11) NOT NULL,
+  `nme_item` varchar(45) NOT NULL,
+  `effect_item` longtext NOT NULL,
+  `dano_item` int(11) DEFAULT NULL,
+  `type_item` varchar(45) DEFAULT NULL,
+  `tb_build_idt_build` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-COMMIT;
+--
+-- Dumping data for table `item`
+--
 
+INSERT INTO `item` (`idt_item`, `nme_item`, `effect_item`, `dano_item`, `type_item`, `tb_build_idt_build`) VALUES
+(1, 'Black King Bar', 'Imunidade a magias', NULL, NULL, 1);
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_hero`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_hero` (`idt_hero`, `nme_hero`, `type_hero`, `cod_status`) VALUES (1, 'Dark Seer', 'Intellect', 1);
+-- --------------------------------------------------------
 
-COMMIT;
+--
+-- Table structure for table `skill`
+--
 
+CREATE TABLE `skill` (
+  `idt_skill` int(11) NOT NULL,
+  `nme_skill` varchar(45) NOT NULL,
+  `effect_skill` longtext NOT NULL,
+  `dano_skill` int(11) DEFAULT NULL,
+  `type_dano_skill` varchar(45) DEFAULT NULL,
+  `cod_hero` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`ta_herobuild`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`ta_herobuild` (`cod_hero`, `cod_build`) VALUES (1, 1);
+--
+-- Dumping data for table `skill`
+--
 
-COMMIT;
+INSERT INTO `skill` (`idt_skill`, `nme_skill`, `effect_skill`, `dano_skill`, `type_dano_skill`, `cod_hero`) VALUES
+(1, 'Surge', 'Velocidade maxima durante alguns segundos', NULL, NULL, 1);
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_skill`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_skill` (`idt_skill`, `nme_skill`, `effect_skill`, `dano_skill`, `type_dano_skill`, `cod_hero`) VALUES (1, 'Wall of Replica', 'Cria ilusões de herois inimigos ao passar pela parede', 200%, 'Magico', 1);
-INSERT INTO `dotaez`.`tb_skill` (`idt_skill`, `nme_skill`, `effect_skill`, `dano_skill`, `type_dano_skill`, `cod_hero`) VALUES (2, 'Surge', 'Concede velocidade maxima por alguns segundos', NULL, NULL, 1);
+--
+-- Table structure for table `status`
+--
 
-COMMIT;
+CREATE TABLE `status` (
+  `idt_status` int(11) NOT NULL,
+  `strenght` int(11) NOT NULL,
+  `agility` int(11) NOT NULL,
+  `intellect` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `status`
+--
 
--- -----------------------------------------------------
--- Data for table `dotaez`.`tb_item`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dotaez`;
-INSERT INTO `dotaez`.`tb_item` (`idt_item`, `nme_item`, `effect_item`, `dano_item`, `type_item`, `tb_build_idt_build`) VALUES (1, 'Shivas', 'Afeta todas unidades inimigas dentro da area', 200, 'Magico', 1);
-INSERT INTO `dotaez`.`tb_item` (`idt_item`, `nme_item`, `effect_item`, `dano_item`, `type_item`, `tb_build_idt_build`) VALUES (2, 'Power treads', 'Concede velocidade de movimento e status', NULL, NULL, 1);
+INSERT INTO `status` (`idt_status`, `strenght`, `agility`, `intellect`) VALUES
+(1, 22, 12, 29);
 
-COMMIT;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `idt_user` int(11) NOT NULL,
+  `nme_user` varchar(50) NOT NULL,
+  `lgn_user` varchar(45) NOT NULL,
+  `psw_user` varchar(45) NOT NULL,
+  `email_user` varchar(80) NOT NULL,
+  `nickdota_user` varchar(50) NOT NULL,
+  `status_user` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`idt_user`, `nme_user`, `lgn_user`, `psw_user`, `email_user`, `nickdota_user`, `status_user`) VALUES
+(1, 'Administrador', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'everton-cs@hotmail.com.br', 'Abraga', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `build`
+--
+ALTER TABLE `build`
+  ADD PRIMARY KEY (`idt_build`),
+  ADD UNIQUE KEY `idt_build_UNIQUE` (`idt_build`);
+
+--
+-- Indexes for table `hero`
+--
+ALTER TABLE `hero`
+  ADD PRIMARY KEY (`idt_hero`,`cod_status`),
+  ADD UNIQUE KEY `idt_hero_UNIQUE` (`idt_hero`),
+  ADD KEY `fk_tb_hero_tb_status1_idx` (`cod_status`);
+
+--
+-- Indexes for table `herobuild`
+--
+ALTER TABLE `herobuild`
+  ADD PRIMARY KEY (`cod_hero`,`cod_build`),
+  ADD KEY `fk_tb_hero_has_tb_build_tb_build1_idx` (`cod_build`),
+  ADD KEY `fk_tb_hero_has_tb_build_tb_hero1_idx` (`cod_hero`);
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`idt_item`,`tb_build_idt_build`),
+  ADD KEY `fk_tb_item_tb_build1_idx` (`tb_build_idt_build`);
+
+--
+-- Indexes for table `skill`
+--
+ALTER TABLE `skill`
+  ADD PRIMARY KEY (`idt_skill`,`cod_hero`),
+  ADD KEY `fk_tb_skill_tb_hero1_idx` (`cod_hero`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`idt_status`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`idt_user`),
+  ADD UNIQUE KEY `idt_user_UNIQUE` (`idt_user`),
+  ADD UNIQUE KEY `lgn_user_UNIQUE` (`lgn_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `build`
+--
+ALTER TABLE `build`
+  MODIFY `idt_build` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `hero`
+--
+ALTER TABLE `hero`
+  MODIFY `idt_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `idt_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `skill`
+--
+ALTER TABLE `skill`
+  MODIFY `idt_skill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `idt_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `idt_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `hero`
+--
+ALTER TABLE `hero`
+  ADD CONSTRAINT `fk_tb_hero_tb_status1` FOREIGN KEY (`cod_status`) REFERENCES `status` (`idt_status`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `herobuild`
+--
+ALTER TABLE `herobuild`
+  ADD CONSTRAINT `fk_tb_hero_has_tb_build_tb_build1` FOREIGN KEY (`cod_build`) REFERENCES `build` (`idt_build`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tb_hero_has_tb_build_tb_hero1` FOREIGN KEY (`cod_hero`) REFERENCES `hero` (`idt_hero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `fk_tb_item_tb_build1` FOREIGN KEY (`tb_build_idt_build`) REFERENCES `build` (`idt_build`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `skill`
+--
+ALTER TABLE `skill`
+  ADD CONSTRAINT `fk_tb_skill_tb_hero1` FOREIGN KEY (`cod_hero`) REFERENCES `hero` (`idt_hero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
