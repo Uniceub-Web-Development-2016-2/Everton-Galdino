@@ -13,7 +13,7 @@ class DBConnector extends PDO {
     public function __construct(){
         $this->engine = 'mysql';
         $this->host = 'localhost';
-        $this->database = 'database';
+        $this->database = 'dotaez';
         $this->user = 'root';
         $this->pass = '';
         $dns = $this->engine.':dbname='.$this->database.";host=".$this->host;
