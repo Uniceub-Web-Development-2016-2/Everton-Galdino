@@ -16,7 +16,7 @@ class DBConnector extends PDO {
         $this->database = 'dotaez';
         $this->user = 'root';
         $this->pass = '';
-        $dns = $this->engine.':dbname='.$this->database.";host=".$this->host;
+        $dns = $this->engine.":host=".$this->host.';dbname='.$this->database.";charset=utf8";
         parent::__construct( $dns, $this->user, $this->pass );
     }	
 		

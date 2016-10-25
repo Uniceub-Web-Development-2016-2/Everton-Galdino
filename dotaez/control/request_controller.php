@@ -1,7 +1,7 @@
 <?php
 
-include ('resource_controller.php');
-include_once('request.php');
+include ('../dotaez/control/resource_controller.php');
+include_once('../dotaez/model/request.php');
 
 class RequestController
 {
