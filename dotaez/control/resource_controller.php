@@ -83,11 +83,11 @@ class ResourceController
 		$where = " WHERE ";
 		$array = json_decode($json, true);
 		foreach($array as $key => $value) {
-			if($key != 'idt_hero')
+			if($key != 'idt')
 				$criteria .= $key." = '".$value."',";
 			
 		}
-		return substr($criteria, 0, -1).$where." idt_hero = '".$array['idt_hero']."'";
+		return substr($criteria, 0, -1).$where." idt = '".$array['idt']."'";
 	}
 
 	private function getColumns($json) 
