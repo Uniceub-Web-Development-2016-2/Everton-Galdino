@@ -14,6 +14,10 @@
     <a href='http://localhost/dotaez/build'>Buscar build</a><br>
     <a href='http://localhost/dotaez/skill'>Buscar skill</a><br>
     <br>
-    <a href='http://localhost/dotaez/client/new-user.html'>Cria usuario</a>
+    <a href='http://localhost/dotaez/client/new-user.html'>Cria usuario</a><br>
+    <a href='http://localhost/dotaez/client/new-hero.html'>Cria hero</a><br>
+    <a href='http://localhost/dotaez/client/new-item.html'>Cria item</a><br>
+    <a href='http://localhost/dotaez/client/new-skill.html'>Cria skill</a><br>
+    <a href='http://localhost/dotaez/client/new-build.html'>Cria build</a><br>
   </body>
 </html>
