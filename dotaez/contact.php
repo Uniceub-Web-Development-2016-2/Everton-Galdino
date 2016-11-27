@@ -37,21 +37,13 @@
           </ul>
         </nav>
       </div>
-		<form method="post" action="verifylogin.php" class="bootstrap-admin-login-form">
-	<?php
-		if(isset($_SESSION['nme_user'])){
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-new-user.php">Novo usuário</a><br>';
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-alter-user.php">Alterar usuário</a>';
-		}
-	?>
-                        <h1>Login</h1>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="login" id="login" placeholder="Login" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                        </div>
-			<button type="submit" class="btn btn-lg btn-primary">Logar</button>
-</form>
-    </div
-</body>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Contato:</h2>
+          <p>Desenvolvedor: Everton Galdino<br>Email: evertongladino@gmail.com<br>Telefone: +55 (61) 98361-2590<br></p>
+        </div>
+
+
+  </body>
+</html>

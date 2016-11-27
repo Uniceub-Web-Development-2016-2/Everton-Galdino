@@ -1,7 +1,7 @@
 <?php
 
-include_once ('../dotaez/model/request.php');
-include_once ('../dotaez/database/db_manager.php');
+include_once ('../dotaserver/model/request.php');
+include_once ('../dotaserver/database/db_manager.php');
 
 class ResourceController
 {	
@@ -24,17 +24,21 @@ class ResourceController
 
 	public function login($request) {
 		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::bodyParams($request->getBody());
-		$result = (new DBConnector())->query($query); 
-                return $result->fetchAll(PDO::FETCH_ASSOC);
+		return self::selection_query($query);
 		
 	}	
 
 	private function selection_query($query) {
+		try{
 		$conn = (new DBConnector())->query($query);
 		$results = $conn->fetchAll(PDO::FETCH_ASSOC);
-		//$json=json_encode($results, JSON_UNESCAPED_UNICODE);
-		//var_dump($json);
+
 		return $results;
+
+		}catch(PDOException $e)
+		{
+			echo "Error: ".$e->getMessage();
+		}
 	}
 	
 	private function queryParams($params) {
@@ -47,6 +51,17 @@ class ResourceController
 			$query.=1;
 		}
 		return $query;
+	}
+
+	private function bodyParams($json)
+	{
+		$criteria = "";
+                	$array = json_decode($json, true);
+                	foreach($array as $key => $value)
+                	{
+                                $criteria .= $key." = '".$value."' AND ";
+                	}
+                return substr($criteria, 0, -5);
 	}
 
 

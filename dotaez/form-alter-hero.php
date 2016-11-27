@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include('function.php');
 ?>	
 <!DOCTYPE html>
 <html lang="en">
@@ -37,21 +38,37 @@
           </ul>
         </nav>
       </div>
-		<form method="post" action="verifylogin.php" class="bootstrap-admin-login-form">
+
+
+<form action='alter-hero.php' method='post'>
 	<?php
-		if(isset($_SESSION['nme_user'])){
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-new-user.php">Novo usuário</a><br>';
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-alter-user.php">Alterar usuário</a>';
-		}
+	combo_hero();
 	?>
-                        <h1>Login</h1>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="login" id="login" placeholder="Login" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                        </div>
-			<button type="submit" class="btn btn-lg btn-primary">Logar</button>
+
+	<br>
+	<br>Identificador  <input type='text' name='idt' placeholder='Identificador'><br>
+	Nome  <input type='text' name='nme_hero' placeholder="Nome"><br>
+	<input type="radio" name="type_hero" value="Intellect" checked> Intellect<br>
+  	<input type="radio" name="type_hero" value="Agility"> Agility<br>
+  	<input type="radio" name="type_hero" value="strength"> strength<br>
+	<input type='submit' value='Submit'>
 </form>
-    </div
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

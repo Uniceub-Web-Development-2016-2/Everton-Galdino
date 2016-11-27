@@ -62,7 +62,7 @@ class Request{
 	public function setOperation($path) {
 		$s = explode("?", $path);
                 $r = explode("/", $s[0]);
-                $this->operation = $r[2];
+                $this->operation = $r[3];
 	}
 	
 	public function getOperation() {

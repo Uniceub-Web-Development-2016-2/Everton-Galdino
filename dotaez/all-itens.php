@@ -37,21 +37,35 @@
           </ul>
         </nav>
       </div>
-		<form method="post" action="verifylogin.php" class="bootstrap-admin-login-form">
-	<?php
+	<div class="container">
+		<?php
 		if(isset($_SESSION['nme_user'])){
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-new-user.php">Novo usuário</a><br>';
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-alter-user.php">Alterar usuário</a>';
+			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-new-item.php">Novo Item</a><br>';
+			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-alter-item.php">Alterar Item</a>';
 		}
-	?>
-                        <h1>Login</h1>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="login" id="login" placeholder="Login" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                        </div>
-			<button type="submit" class="btn btn-lg btn-primary">Logar</button>
-</form>
-    </div
-</body>
+		?>
+		<h2 class="sub-header">Todos os itens</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Identificador</th>
+						<th>Nome</th>
+						<th>Descrição</th>
+					</tr>
+			</thead>
+			<tbody>
+			<?php
+			include('httpful.phar');
+			$get_request = 'http://localhost/dotaserver/item/';
+			$response = \Httpful\Request::get($get_request)->send();
+			$response->body;
+			$arr = json_decode($response->body, true);
+			foreach ($arr as $key =>$value){
+				echo '<tr><td>'.$value['idt'].'</td>'.'<td>'.$value['nme_item'].'</td>'.'<td>'.$value['desc_item'].'</td></tr>';
+			}
+			?>
+			</tbody>
+			</table>
+	</div>
+
+  </body>

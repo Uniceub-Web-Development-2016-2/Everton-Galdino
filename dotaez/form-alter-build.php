@@ -37,21 +37,11 @@
           </ul>
         </nav>
       </div>
-		<form method="post" action="verifylogin.php" class="bootstrap-admin-login-form">
-	<?php
-		if(isset($_SESSION['nme_user'])){
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-new-user.php">Novo usuário</a><br>';
-			echo '<a class="btn btn-warning" href="http://localhost/dotaez/form-alter-user.php">Alterar usuário</a>';
-		}
-	?>
-                        <h1>Login</h1>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="login" id="login" placeholder="Login" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                        </div>
-			<button type="submit" class="btn btn-lg btn-primary">Logar</button>
-</form>
-    </div
+    <form action='alter-build.php' method='post'>
+	<input type='text' name='idt' placeholder='Identificador'><br>
+	<input type='text' name='nme_build' placeholder='Nome'><br>
+	<input type='text' name='hero' placeholder='heroi'><br>
+	<input type='text' name='itens' placeholder='itens separados por ";" '><br>
+	<input type='submit' value='Submit'>
+    </form>
 </body>
