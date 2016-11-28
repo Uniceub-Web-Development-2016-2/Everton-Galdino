@@ -20,20 +20,20 @@
     <div class="container">
 
       <div class="masthead">
-        <a href="http://localhost/dotaez/index.php"><img src="img/dotalogo.png" width="50" height="50"></a> 
+        <a href="index.php"><img src="img/dotalogo.png" width="50" height="50"></a> 
 	<?php
 		if(isset($_SESSION['nme_user'])){
-   			echo "<p align=”Right”>Buenas noches señorita ".$_SESSION['nme_user']."	"."<a href='http://localhost/dotaez/logout.php'>Logout</a>"."</p>";
+   			echo "<p align=”Right”>Buenas noches señorita ".$_SESSION['nme_user']."	"."<a href='logout.php'>Logout</a>"."</p>";
 		}
 	?>
         <nav>
           <ul class="nav nav-justified">
-            <li class="nav-item"><a class="nav-link active" href="http://localhost/dotaez/index.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/dotaez/all-builds.php">Builds</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/dotaez/all-heroes.php">Heroes</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/dotaez/all-itens.php">Itens</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/dotaez/contact.php">Contact</a></li>
-	    <li class="nav-item"><a class="nav-link" href="http://localhost/dotaez/login.php">Login(Moderadores)</a></li>
+            <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="all-builds.php">Builds</a></li>
+            <li class="nav-item"><a class="nav-link" href="all-heroes.php">Heroes</a></li>
+            <li class="nav-item"><a class="nav-link" href="all-itens.php">Itens</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+	    <li class="nav-item"><a class="nav-link" href="login.php">Login(Moderadores)</a></li>
           </ul>
         </nav>
       </div>
@@ -57,23 +57,5 @@
         </div>
     </div>
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-    <a href='http://localhost/dotaserver/user'>Buscar Usuarios</a><br>
-    <a href='http://localhost/dotaez/hero'>Buscar hero</a><br>
-    <a href='http://localhost/dotaez/item'>Buscar item</a><br>
-    <a href='http://localhost/dotaez/build'>Buscar build</a><br>
-    <a href='http://localhost/dotaez/skill'>Buscar skill</a><br>
-    <br>
-    <a href='http://localhost/dotaez/new-user.html'>Cria usuario</a><br>
-    <a href='http://localhost/dotaez/new-hero.html'>Cria hero</a><br>
-    <a href='http://localhost/dotaez/new-item.html'>Cria item</a><br>
-    <a href='http://localhost/dotaez/new-skill.html'>Cria skill</a><br>
-    <a href='http://localhost/dotaez/new-build.html'>Cria build</a><br>
-    <br>
-    <a href='http://localhost/dotaez/alter-hero.html' method='get'>Alterar hero</a><br>
-    <a href='http://localhost/dotaez/alter-user.html'>Alterar usuario</a><br>
-    <a href='http://localhost/dotaez/alter-item.html'>Alterar item</a><br>
-    <a href='http://localhost/dotaez/alter-skill.html'>Alterar skill</a><br>
-    <a href='http://localhost/dotaez/alter-build.html'>Alterar build</a><br>
-  </body>
+</body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 include('httpful.phar');
 $json = json_encode($_POST);
-$get_request = 'http://127.0.0.1/dotaserver/hero/newHero';
+$get_request = 'http://localhost/dotaserver/hero/newHero';
 $response = \Httpful\Request::post($get_request)
 ->sendsJson()
 ->body($json)->send();
