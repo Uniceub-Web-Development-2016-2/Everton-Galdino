@@ -40,22 +40,16 @@
 
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>Atualização 6.87</h1>
-        <p class="lead">Tudo sobre a última atualização</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Saiba mais</a></p>
+        <h1>Atualizações do jogo</h1>
+        <p class="lead">Fique por dentro de todas as atualizações que acontecem no dota 2!</p>
+        <p><a class="btn btn-lg btn-success" href="http://www.dota2.com/news/updates/" role="button">Site Oficial</a></p>
       </div>
-
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>Valve anuncia datas do próximo International</h2>
-          <p>A Valve anunciou nesta quinta-feira (3) as datas para a próxima edição do The International, o campeonato mundial de Dota 2, e novas informações para o Major da primavera norte-americana do ano que vem, incluindo os dias da competição e mudanças no formato.</p>
-          <p><a class="btn btn-primary" href="#" role="button">Veja mais &raquo;</a></p>
+  <div> 
       <footer class="footer">
-        <p>&copy; Direito de resposta MC Jhonny(Esperando o silêncio pra rimar)</p>
+        <p>&copy; N & E :*</p>
       </footer>
-        </div>
-    </div>
+  </div>
+
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@
 			echo '<a class="btn btn-warning" href="form-alter-user.php">Alterar usuário</a>';
 		}
 	?>
-                        <h1>Login</h1>
+                        <h1>Login **(login: admin senha: 123)**</h1>
                         <div class="form-group">
                             <input class="form-control" type="text" name="login" id="login" placeholder="Login" required>
                         </div>

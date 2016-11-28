@@ -40,8 +40,8 @@
 	<div class="container">
 <?php
 		if(isset($_SESSION['nme_user'])){
-			echo '<a class="btn btn-warning" href="form-new-hero.php">Novo Item</a><br>';
-			echo '<a class="btn btn-warning" href="form-alter-hero.php">Alterar Item</a>';
+			echo '<a class="btn btn-warning" href="form-new-hero.php">Novo Hero</a><br>';
+			echo '<a class="btn btn-warning" href="form-alter-hero.php">Alterar Hero</a>';
 		}
 ?>
 		<h2 class="sub-header">Todos os Heróis</h2>
